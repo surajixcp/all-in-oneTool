@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Density Checker - All-in-One Tools</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../styles.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5b5d10634d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="h4 mb-0">
+                            <i class="fas fa-chart-bar me-2"></i>Keyword Density Checker
+                        </h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted mb-4">Analyze the keyword density in your text to optimize your content for SEO.</p>
+                        
+                        <!-- Keyword Density Form -->
+                        <form id="keywordDensityForm" class="mb-4">
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Enter your text</label>
+                                <textarea class="form-control" id="text" rows="10" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="minWordLength" class="form-label">Minimum word length</label>
+                                <input type="number" class="form-control" id="minWordLength" value="3" min="1" max="10">
+                            </div>
+                            <div class="mb-3">
+                                <label for="minFrequency" class="form-label">Minimum frequency</label>
+                                <input type="number" class="form-control" id="minFrequency" value="2" min="1">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>Analyze Keywords
+                            </button>
+                        </form>
+
+                        <!-- Results Section -->
+                        <div id="results" class="d-none">
+                            <h5 class="mb-3">Keyword Analysis Results</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Text Statistics</h6>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>Total words: <span id="totalWords">0</span></li>
+                                                <li>Unique words: <span id="uniqueWords">0</span></li>
+                                                <li>Average word length: <span id="avgWordLength">0</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Top Keywords</h6>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>Most frequent: <span id="topKeyword">-</span></li>
+                                                <li>Frequency: <span id="topFrequency">0</span></li>
+                                                <li>Density: <span id="topDensity">0%</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Keyword</th>
+                                            <th>Frequency</th>
+                                            <th>Density</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="keywordTable"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Common JS -->
+    <script src="../../main.js"></script>
+    <!-- Tool JS -->
+    <script src="keyword-density-checker.js"></script>
+</body>
+</html> 

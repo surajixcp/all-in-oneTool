@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker - All-in-One Tools</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../styles.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5b5d10634d.js" crossorigin="anonymous"></script>
+    <style>
+        .color-preview {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .color-value {
+            font-family: monospace;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .color-value:hover {
+            background-color: #e9ecef;
+        }
+        
+        .color-value.copied {
+            background-color: #d1e7dd;
+        }
+        
+        .color-scheme {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .scheme-color {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .scheme-color:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scheme-color .color-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .custom-range::-webkit-slider-thumb {
+            background: #0d6efd;
+        }
+        
+        .custom-range::-moz-range-thumb {
+            background: #0d6efd;
+        }
+        
+        .custom-range::-ms-thumb {
+            background: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Tool Content -->
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-3"><i class="fas fa-palette me-2"></i>Color Picker</h1>
+                <p class="lead">Select and convert colors between different formats (HEX, RGB, HSL).</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Color Picker</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="color-preview" id="colorPreview"></div>
+                        
+                        <div class="mb-3">
+                            <label for="colorInput" class="form-label">Select Color</label>
+                            <input type="color" class="form-control form-control-color w-100" id="colorInput" value="#0d6efd">
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-4 mb-2">
+                                <label for="redRange" class="form-label">Red: <span id="redValue">13</span></label>
+                                <input type="range" class="form-range custom-range" id="redRange" min="0" max="255" value="13">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="greenRange" class="form-label">Green: <span id="greenValue">110</span></label>
+                                <input type="range" class="form-range custom-range" id="greenRange" min="0" max="255" value="110">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="blueRange" class="form-label">Blue: <span id="blueValue">253</span></label>
+                                <input type="range" class="form-range custom-range" id="blueRange" min="0" max="255" value="253">
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-4 mb-2">
+                                <label for="hueRange" class="form-label">Hue: <span id="hueValue">215</span>°</label>
+                                <input type="range" class="form-range custom-range" id="hueRange" min="0" max="360" value="215">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="saturationRange" class="form-label">Saturation: <span id="saturationValue">95</span>%</label>
+                                <input type="range" class="form-range custom-range" id="saturationRange" min="0" max="100" value="95">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="lightnessRange" class="form-label">Lightness: <span id="lightnessValue">52</span>%</label>
+                                <input type="range" class="form-range custom-range" id="lightnessRange" min="0" max="100" value="52">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="colorInput" class="form-label">Enter Color Value</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="colorTextInput" placeholder="Enter HEX, RGB, or HSL value">
+                                <button class="btn btn-primary" id="applyColorBtn">Apply</button>
+                            </div>
+                            <small class="text-muted">Examples: #0d6efd, rgb(13, 110, 253), hsl(215, 95%, 52%)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Color Values</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">HEX</label>
+                            <div class="color-value" id="hexValue" data-format="hex">#0d6efd</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">RGB</label>
+                            <div class="color-value" id="rgbValue" data-format="rgb">rgb(13, 110, 253)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">HSL</label>
+                            <div class="color-value" id="hslValue" data-format="hsl">hsl(215, 95%, 52%)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">RGBA</label>
+                            <div class="color-value" id="rgbaValue" data-format="rgba">rgba(13, 110, 253, 1)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">HSLA</label>
+                            <div class="color-value" id="hslaValue" data-format="hsla">hsla(215, 95%, 52%, 1)</div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="mb-3">
+                            <label for="schemeSelect" class="form-label">Color Schemes</label>
+                            <select class="form-select" id="schemeSelect" aria-label="Select color scheme">
+                                <option value="monochromatic">Monochromatic</option>
+                                <option value="analogous">Analogous</option>
+                                <option value="complementary">Complementary</option>
+                                <option value="triadic">Triadic</option>
+                                <option value="tetradic">Tetradic</option>
+                            </select>
+                        </div>
+                        
+                        <div class="color-scheme" id="colorScheme">
+                            <!-- Color scheme will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">How to Use</h5>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Select a color using the color picker or sliders.</li>
+                            <li>Adjust RGB or HSL values using the sliders.</li>
+                            <li>Copy color values in different formats by clicking on them.</li>
+                            <li>Generate color schemes based on your selected color.</li>
+                            <li>Enter a color value manually in HEX, RGB, or HSL format.</li>
+                        </ol>
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>Click on any color value or scheme color to copy it to clipboard.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Common JS -->
+    <script src="../../main.js"></script>
+    <!-- Tool JS -->
+    <script src="color-picker.js"></script>
+</body>
+</html> 

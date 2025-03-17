@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder/Decoder - All-in-One Tools</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../styles.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5b5d10634d.js" crossorigin="anonymous"></script>
+    <style>
+        .tab-content {
+            padding: 20px 0;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #6c757d;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: #0d6efd;
+            font-weight: 500;
+        }
+        
+        .file-upload-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .file-upload-input {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 40px;
+            margin: 0;
+            padding: 0;
+            display: block;
+            cursor: pointer;
+            opacity: 0;
+        }
+        
+        .file-upload-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            z-index: 0;
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            background-color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .result-container {
+            min-height: 100px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            margin-bottom: 15px;
+            word-wrap: break-word;
+        }
+        
+        .btn-icon {
+            margin-right: 5px;
+        }
+        
+        .stats {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 15px 0;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Tool Content -->
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-3"><i class="fas fa-exchange-alt me-2"></i>Base64 Encoder/Decoder</h1>
+                <p class="lead">Encode or decode text and files to/from Base64 format.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Tabs -->
+                <ul class="nav nav-tabs" id="base64Tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab" aria-controls="text" aria-selected="true">
+                            <i class="fas fa-font me-2"></i>Text
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="file-tab" data-bs-toggle="tab" data-bs-target="#file" type="button" role="tab" aria-controls="file" aria-selected="false">
+                            <i class="fas fa-file me-2"></i>File
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image" type="button" role="tab" aria-controls="image" aria-selected="false">
+                            <i class="fas fa-image me-2"></i>Image
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="base64TabContent">
+                    <!-- Text Tab -->
+                    <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="textInput" class="form-label">Input Text</label>
+                                    <textarea class="form-control" id="textInput" rows="6" placeholder="Enter text to encode or Base64 to decode"></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="textOperation" id="encodeText" value="encode" checked>
+                                        <label class="form-check-label" for="encodeText">Encode to Base64</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="textOperation" id="decodeText" value="decode">
+                                        <label class="form-check-label" for="decodeText">Decode from Base64</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <button id="processTextBtn" class="btn btn-primary">
+                                        <i class="fas fa-cogs btn-icon"></i>Process
+                                    </button>
+                                    <button id="clearTextBtn" class="btn btn-outline-secondary ms-2">
+                                        <i class="fas fa-eraser btn-icon"></i>Clear
+                                    </button>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="textResult" class="form-label">Result</label>
+                                    <div id="textResult" class="result-container"></div>
+                                    <div id="textStats" class="stats"></div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <button id="copyTextResultBtn" class="btn btn-success" disabled>
+                                        <i class="fas fa-copy btn-icon"></i>Copy Result
+                                    </button>
+                                    <button id="downloadTextResultBtn" class="btn btn-outline-primary ms-2" disabled>
+                                        <i class="fas fa-download btn-icon"></i>Download Result
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- File Tab -->
+                    <div class="tab-pane fade" id="file" role="tabpanel" aria-labelledby="file-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Select File</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="fileInput" class="file-upload-input" aria-label="Select file to encode or decode">
+                                        <div class="file-upload-text">Choose a file...</div>
+                                    </div>
+                                    <small class="text-muted">Maximum file size: 5MB</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="fileOperation" id="encodeFile" value="encode" checked>
+                                        <label class="form-check-label" for="encodeFile">Encode to Base64</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="fileOperation" id="decodeFile" value="decode">
+                                        <label class="form-check-label" for="decodeFile">Decode from Base64</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <button id="processFileBtn" class="btn btn-primary" disabled>
+                                        <i class="fas fa-cogs btn-icon"></i>Process
+                                    </button>
+                                    <button id="clearFileBtn" class="btn btn-outline-secondary ms-2">
+                                        <i class="fas fa-eraser btn-icon"></i>Clear
+                                    </button>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="fileResult" class="form-label">Result</label>
+                                    <div id="fileResult" class="result-container"></div>
+                                    <div id="fileStats" class="stats"></div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <button id="copyFileResultBtn" class="btn btn-success" disabled>
+                                        <i class="fas fa-copy btn-icon"></i>Copy Result
+                                    </button>
+                                    <button id="downloadFileResultBtn" class="btn btn-outline-primary ms-2" disabled>
+                                        <i class="fas fa-download btn-icon"></i>Download Result
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Image Tab -->
+                    <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Select Image</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="imageInput" class="file-upload-input" accept="image/*" aria-label="Select image to encode or decode">
+                                        <div class="file-upload-text">Choose an image...</div>
+                                    </div>
+                                    <small class="text-muted">Supported formats: JPG, PNG, GIF, SVG, WebP</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="imageOperation" id="encodeImage" value="encode" checked>
+                                        <label class="form-check-label" for="encodeImage">Encode to Base64</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="imageOperation" id="decodeImage" value="decode">
+                                        <label class="form-check-label" for="decodeImage">Decode from Base64</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <button id="processImageBtn" class="btn btn-primary" disabled>
+                                        <i class="fas fa-cogs btn-icon"></i>Process
+                                    </button>
+                                    <button id="clearImageBtn" class="btn btn-outline-secondary ms-2">
+                                        <i class="fas fa-eraser btn-icon"></i>Clear
+                                    </button>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="imageResult" class="form-label">Result</label>
+                                    <div id="imageResult" class="result-container"></div>
+                                    <div id="imageStats" class="stats"></div>
+                                    <img id="imagePreview" class="image-preview d-none" alt="Image Preview">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <button id="copyImageResultBtn" class="btn btn-success" disabled>
+                                        <i class="fas fa-copy btn-icon"></i>Copy Result
+                                    </button>
+                                    <button id="downloadImageResultBtn" class="btn btn-outline-primary ms-2" disabled>
+                                        <i class="fas fa-download btn-icon"></i>Download Result
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">About Base64 Encoding</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format by translating it into a radix-64 representation. It's commonly used when there's a need to encode binary data that needs to be stored and transferred over media that are designed to deal with text.</p>
+                        
+                        <h6>Common Uses:</h6>
+                        <ul>
+                            <li>Embedding images directly in HTML or CSS</li>
+                            <li>Sending binary data in email attachments</li>
+                            <li>Storing complex data in JSON</li>
+                            <li>Transferring data in URL parameters</li>
+                            <li>Encoding user credentials in basic authentication</li>
+                        </ul>
+                        
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>Base64 encoding increases the data size by approximately 33% compared to the original binary data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Common JS -->
+    <script src="../../main.js"></script>
+    <!-- Tool JS -->
+    <script src="base64.js"></script>
+</body>
+</html> 

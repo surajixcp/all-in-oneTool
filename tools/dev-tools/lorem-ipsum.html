@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator - All-in-One Tools</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../styles.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5b5d10634d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Tool Content -->
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-3"><i class="fas fa-text-width me-2"></i>Lorem Ipsum Generator</h1>
+                <p class="lead">Generate placeholder text for design mockups and layouts.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Options</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="loremForm">
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Type</label>
+                                <select id="type" class="form-select">
+                                    <option value="paragraphs" selected>Paragraphs</option>
+                                    <option value="sentences">Sentences</option>
+                                    <option value="words">Words</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount</label>
+                                <input type="number" id="amount" class="form-control" min="1" max="100" value="3">
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="startWithLorem" checked>
+                                    <label class="form-check-label" for="startWithLorem">
+                                        Start with "Lorem ipsum dolor sit amet..."
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="format" class="form-label">Format</label>
+                                <select id="format" class="form-select">
+                                    <option value="plain" selected>Plain Text</option>
+                                    <option value="html">HTML</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="htmlOptionsContainer" style="display: none;">
+                                <label class="form-label">HTML Options</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="htmlTag" id="pTag" value="p" checked>
+                                    <label class="form-check-label" for="pTag">
+                                        &lt;p&gt; tags
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="htmlTag" id="divTag" value="div">
+                                    <label class="form-check-label" for="divTag">
+                                        &lt;div&gt; tags
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="htmlTag" id="spanTag" value="span">
+                                    <label class="form-check-label" for="spanTag">
+                                        &lt;span&gt; tags
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="htmlTag" id="liTag" value="li">
+                                    <label class="form-check-label" for="liTag">
+                                        &lt;li&gt; tags (with &lt;ul&gt;)
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-sync-alt me-2"></i>Generate
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Generated Text</h5>
+                        <div>
+                            <button id="copyBtn" class="btn btn-light btn-sm">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="output" class="p-3 bg-light rounded" style="min-height: 400px; max-height: 400px; overflow-y: auto;">
+                            <p>Click the "Generate" button to create Lorem Ipsum text.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">About Lorem Ipsum</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>This tool works entirely in your browser. Your generated text is never sent to any server.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Common JS -->
+    <script src="../../main.js"></script>
+    <!-- Tool JS -->
+    <script src="lorem-ipsum.js"></script>
+</body>
+</html> 

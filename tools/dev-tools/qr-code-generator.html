@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - All-in-One Tools</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../styles.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5b5d10634d.js" crossorigin="anonymous"></script>
+    <style>
+        .qr-preview {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            background-color: white;
+        }
+        
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border: 1px solid #dee2e6;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        
+        .download-btn {
+            margin-top: 10px;
+        }
+        
+        .qr-options {
+            margin-top: 20px;
+        }
+        
+        .qr-size-value {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .qr-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Tool Content -->
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-3"><i class="fas fa-qrcode me-2"></i>QR Code Generator</h1>
+                <p class="lead">Generate QR codes for text, URLs, contact information, and more.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">QR Code Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="qrForm">
+                            <div class="mb-3">
+                                <label for="qrType" class="form-label">QR Code Type</label>
+                                <select class="form-select" id="qrType" aria-label="Select QR code type">
+                                    <option value="text">Text</option>
+                                    <option value="url">URL</option>
+                                    <option value="vcard">Contact (vCard)</option>
+                                    <option value="wifi">WiFi Network</option>
+                                    <option value="email">Email</option>
+                                    <option value="sms">SMS</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="qrContent" class="form-label">Content</label>
+                                <textarea class="form-control" id="qrContent" rows="3" placeholder="Enter content for QR code"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="qrSize" class="form-label">QR Code Size: <span id="sizeValue">150</span>px</label>
+                                <input type="range" class="form-range" id="qrSize" min="100" max="500" step="10" value="150">
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="qrForeground" class="form-label">Foreground Color</label>
+                                    <input type="color" class="form-control form-control-color w-100" id="qrForeground" value="#000000">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="qrBackground" class="form-label">Background Color</label>
+                                    <input type="color" class="form-control form-control-color w-100" id="qrBackground" value="#FFFFFF">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="qrErrorCorrection" class="form-label">Error Correction</label>
+                                <select class="form-select" id="qrErrorCorrection" aria-label="Select error correction level">
+                                    <option value="L">Low (7%)</option>
+                                    <option value="M" selected>Medium (15%)</option>
+                                    <option value="Q">Quartile (25%)</option>
+                                    <option value="H">High (30%)</option>
+                                </select>
+                                <div class="form-text">Higher correction allows QR code to be readable even if partially damaged.</div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Generate QR Code</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">QR Code Preview</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="qr-container">
+                            <img id="qrCodeImage" class="qr-preview" src="" alt="QR Code will appear here">
+                            <div id="qrPlaceholder" class="text-center p-5">
+                                <i class="fas fa-qrcode fa-5x text-muted mb-3"></i>
+                                <p class="text-muted">Your QR code will appear here</p>
+                            </div>
+                        </div>
+
+                        <div id="downloadOptions" class="d-none">
+                            <div class="d-grid gap-2">
+                                <button id="downloadPng" class="btn btn-success download-btn">
+                                    <i class="fas fa-download me-2"></i>Download as PNG
+                                </button>
+                                <button id="downloadSvg" class="btn btn-outline-primary download-btn">
+                                    <i class="fas fa-download me-2"></i>Download as SVG
+                                </button>
+                                <button id="copyQrCode" class="btn btn-outline-secondary download-btn">
+                                    <i class="fas fa-copy me-2"></i>Copy to Clipboard
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">How to Use</h5>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Select the type of QR code you want to generate.</li>
+                            <li>Enter the content for your QR code.</li>
+                            <li>Customize the appearance (size, colors, error correction).</li>
+                            <li>Click "Generate QR Code" to create your QR code.</li>
+                            <li>Download the QR code in your preferred format or copy it to clipboard.</li>
+                        </ol>
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>This tool uses the QR Server API to generate QR codes. All processing is done on the server side.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Common JS -->
+    <script src="../../main.js"></script>
+    <!-- Tool JS -->
+    <script src="qr-code-generator.js"></script>
+</body>
+</html> 
