@@ -1,0 +1,144 @@
+<!-- Header -->
+<header class="bg-primary text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-tools me-2"></i>All-in-One Tools
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Main Navigation -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Image Tools -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-image me-1"></i>Image Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="tools/image-tools/image-to-png.html">
+                                <i class="fas fa-file-image me-2"></i>Image to PNG
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/image-tools/image-to-jpg.html">
+                                <i class="fas fa-file-image me-2"></i>Image to JPG
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/image-tools/image-resizer.html">
+                                <i class="fas fa-expand-arrows-alt me-2"></i>Image Resizer
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/image-tools/image-compressor.html">
+                                <i class="fas fa-compress-arrows-alt me-2"></i>Image Compressor
+                            </a></li>
+                        </ul>
+                    </li>
+
+                    <!-- SEO Tools -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-search me-1"></i>SEO Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="tools/seo-tools/meta-tag-generator.html">
+                                <i class="fas fa-tags me-2"></i>Meta Tag Generator
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/seo-tools/keyword-density-checker.html">
+                                <i class="fas fa-chart-bar me-2"></i>Keyword Density Checker
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/seo-tools/sitemap-generator.html">
+                                <i class="fas fa-sitemap me-2"></i>Sitemap Generator
+                            </a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Text Tools -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-font me-1"></i>Text Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="tools/text-tools/word-counter.html">
+                                <i class="fas fa-calculator me-2"></i>Word Counter
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/text-tools/text-converter.html">
+                                <i class="fas fa-exchange-alt me-2"></i>Text Converter
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/text-tools/grammar-checker.html">
+                                <i class="fas fa-check-circle me-2"></i>Grammar Checker
+                            </a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Developer Tools -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-code me-1"></i>Developer Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="tools/dev-tools/json-formatter.html">
+                                <i class="fas fa-brackets-curly me-2"></i>JSON Formatter
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/html-formatter.html">
+                                <i class="fas fa-code me-2"></i>HTML Formatter
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/css-minifier.html">
+                                <i class="fas fa-file-code me-2"></i>CSS Minifier
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/js-minifier.html">
+                                <i class="fas fa-js me-2"></i>JavaScript Minifier
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/code-diff.html">
+                                <i class="fas fa-code-compare me-2"></i>Code Diff Checker
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/lorem-ipsum.html">
+                                <i class="fas fa-text-width me-2"></i>Lorem Ipsum Generator
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/color-picker.html">
+                                <i class="fas fa-palette me-2"></i>Color Picker
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/qr-code-generator.html">
+                                <i class="fas fa-qrcode fa-fw me-2"></i> QR Code Generator
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/url-qr-generator.html">
+                                <i class="fas fa-link fa-fw me-2"></i> URL QR Code Generator
+                            </a></li>
+                            <li><a class="dropdown-item" href="tools/dev-tools/base64.html">
+                                <i class="fas fa-exchange-alt fa-fw me-2"></i> Base64 Encoder/Decoder
+                            </a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Search Form -->
+                <form class="d-flex position-relative" id="searchForm">
+                    <div class="input-group">
+                        <input class="form-control" type="search" id="searchInput" placeholder="Search tools..." aria-label="Search">
+                        <button class="btn btn-light" type="submit" aria-label="Search tools">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <!-- Search Results Dropdown -->
+                    <div id="searchResults" class="position-absolute w-100 bg-white shadow-sm mt-1" style="display: none; z-index: 1000;">
+                        <div class="list-group list-group-flush"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Ad Space -->
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-12">
+            <div class="ad-space-top text-center">
+                <!-- AdSense Code will go here -->
+                <div class="ad-placeholder">Advertisement Space</div>
+            </div>
+        </div>
+    </div>
+</div> 
